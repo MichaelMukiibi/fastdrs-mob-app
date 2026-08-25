@@ -5,16 +5,12 @@ plugins {
 
 android {
     namespace = "com.campmap.fastdrs"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.campmap.fastdrs"
-        minSdk = 34
-        targetSdk = 36
+        minSdk = 33
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
