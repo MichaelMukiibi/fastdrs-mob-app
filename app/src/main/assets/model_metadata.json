@@ -1,0 +1,8 @@
+{
+  "model_name": "fastdrs",
+  "version": "1.0.0",
+  "architecture": "mobilenet_v2",
+  "input_size": 224,
+  "num_classes": 5,
+  "runtime": "litert"
+}
