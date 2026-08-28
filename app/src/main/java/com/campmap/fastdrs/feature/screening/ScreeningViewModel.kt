@@ -24,4 +24,8 @@ class ScreeningViewModel : ViewModel() {
     fun updateImage(image: FundusImage) {
         _screeningState.value = _screeningState.value?.copy(image = image)
     }
+
+    fun setPrediction(prediction: Any) {
+        _screeningState.value = _screeningState.value?.copy(prediction = prediction)
+    }
 }
