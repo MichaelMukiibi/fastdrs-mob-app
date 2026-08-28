@@ -19,9 +19,8 @@ import com.campmap.fastdrs.feature.screening.result.ResultScreen
 @Composable
 fun AppNavHost() {
     val navController = rememberNavController()
-    // NOTE: This will fail until a ViewModel Factory is provided. 
-    // Simplified for this vertical slice demonstration.
-    val viewModel: ScreeningViewModel = viewModel()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val viewModel: ScreeningViewModel = viewModel(factory = ScreeningViewModel.provideFactory(context))
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
             HomeScreen(onStartScreening = {

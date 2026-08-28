@@ -1,9 +1,12 @@
 package com.campmap.fastdrs.feature.screening
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.campmap.fastdrs.core.image.FundusImage
 import com.campmap.fastdrs.core.ml.InferenceEngine
+import com.campmap.fastdrs.core.ml.LiteRTInferenceEngine
 import com.campmap.fastdrs.domain.model.Eye
 import com.campmap.fastdrs.domain.model.Screening
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +17,16 @@ import java.util.UUID
 class ScreeningViewModel(private val inferenceEngine: InferenceEngine) : ViewModel() {
     private val _screeningState = MutableStateFlow<Screening?>(null)
     val screeningState: StateFlow<Screening?> = _screeningState
+
+    companion object {
+        fun provideFactory(context: Context): ViewModelProvider.Factory =
+            object : ViewModelProvider.Factory {
+                @Suppress("UNCHECKED_CAST")
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    return ScreeningViewModel(LiteRTInferenceEngine(context)) as T
+                }
+            }
+    }
 
     fun startScreening(eye: Eye) {
         _screeningState.value = Screening(
