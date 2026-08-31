@@ -2,6 +2,10 @@ package com.campmap.fastdrs.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val Purple80 = Color(0xFFD0BCFF)
+val PurpleGrey80 = Color(0xFFCCC2DC)
+val Pink80 = Color(0xFFEFB8C8)
+
 val MedicalBlue = Color(0xFF005FB8)
 val SurfaceGray = Color(0xFFF8F9FA)
 val TextDark = Color(0xFF1F1F1F)
