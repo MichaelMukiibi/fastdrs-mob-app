@@ -7,10 +7,20 @@ enum class Eye {
     RIGHT
 }
 
+enum class ScreeningStatus {
+    CREATED,
+    IMAGE_SELECTED,
+    ANALYZING,
+    COMPLETED,
+    FAILED
+}
+
 data class Screening(
     val id: String,
+    val patientId: String,
     val timestamp: Long,
     val eye: Eye,
     val image: FundusImage?,
-    val prediction: Any? = null
+    val prediction: Any? = null,
+    val status: ScreeningStatus = ScreeningStatus.CREATED
 )
