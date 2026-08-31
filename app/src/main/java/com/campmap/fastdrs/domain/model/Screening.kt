@@ -1,5 +1,7 @@
 package com.campmap.fastdrs.domain.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.campmap.fastdrs.core.image.FundusImage
 
 enum class Eye {
@@ -15,12 +17,13 @@ enum class ScreeningStatus {
     FAILED
 }
 
+@Entity
 data class Screening(
-    val id: String,
+    @PrimaryKey val id: String,
     val patientId: String,
     val timestamp: Long,
     val eye: Eye,
     val image: FundusImage?,
-    val prediction: Any? = null,
+    val prediction: String? = null,
     val status: ScreeningStatus = ScreeningStatus.CREATED
 )
