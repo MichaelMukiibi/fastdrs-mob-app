@@ -26,13 +26,11 @@ fun AppNavHost() {
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
             HomeScreen(onStartScreening = {
-                // For now, hardcode a default patientId
                 navController.navigate(Screen.ScreeningSetup.route)
             })
         }
         composable(Screen.ScreeningSetup.route) {
             ScreeningSetupScreen(onContinue = { eye ->
-                // Pass a hardcoded default patient ID for this demo flow
                 viewModel.startScreening("DEFAULT_PATIENT", eye)
                 navController.navigate(Screen.ImageAcquisition.route)
             })
@@ -57,6 +55,7 @@ fun AppNavHost() {
             }
         }
         composable(Screen.Analysis.route) {
+            AnalysisScreen()
             val state by viewModel.screeningState.collectAsState()
             LaunchedEffect(state?.prediction) {
                 if (state?.prediction != null) {
@@ -65,18 +64,16 @@ fun AppNavHost() {
                     }
                 }
             }
-            AnalysisScreen()
         }
         composable(Screen.Result.route) {
             val state by viewModel.screeningState.collectAsState()
-            // Simplified for demonstration
-            state?.prediction?.let { prediction ->
-                // ResultScreen(prediction = prediction as com.campmap.fastdrs.core.ml.Prediction, onDone = {
-                //     navController.navigate(Screen.Home.route) {
-                //         popUpTo(Screen.Home.route) { inclusive = true }
-                //     }
-                // })
-                Text("Result displayed: $prediction")
+            state?.prediction?.let { predictionJson ->
+                val prediction = com.campmap.fastdrs.core.ml.Prediction.fromJson(predictionJson)
+                ResultScreen(prediction = prediction, onDone = {
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Home.route) { inclusive = true }
+                    }
+                })
             }
         }
     }
