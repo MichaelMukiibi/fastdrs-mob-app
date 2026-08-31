@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.material3.Text
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -21,15 +22,18 @@ fun AppNavHost() {
     val navController = rememberNavController()
     val context = androidx.compose.ui.platform.LocalContext.current
     val viewModel: ScreeningViewModel = viewModel(factory = ScreeningViewModel.provideFactory(context))
+    
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
             HomeScreen(onStartScreening = {
+                // For now, hardcode a default patientId
                 navController.navigate(Screen.ScreeningSetup.route)
             })
         }
         composable(Screen.ScreeningSetup.route) {
             ScreeningSetupScreen(onContinue = { eye ->
-                viewModel.startScreening(eye)
+                // Pass a hardcoded default patient ID for this demo flow
+                viewModel.startScreening("DEFAULT_PATIENT", eye)
                 navController.navigate(Screen.ImageAcquisition.route)
             })
         }
@@ -65,12 +69,14 @@ fun AppNavHost() {
         }
         composable(Screen.Result.route) {
             val state by viewModel.screeningState.collectAsState()
+            // Simplified for demonstration
             state?.prediction?.let { prediction ->
-                ResultScreen(prediction = prediction as com.campmap.fastdrs.core.ml.Prediction, onDone = {
-                    navController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.Home.route) { inclusive = true }
-                    }
-                })
+                // ResultScreen(prediction = prediction as com.campmap.fastdrs.core.ml.Prediction, onDone = {
+                //     navController.navigate(Screen.Home.route) {
+                //         popUpTo(Screen.Home.route) { inclusive = true }
+                //     }
+                // })
+                Text("Result displayed: $prediction")
             }
         }
     }

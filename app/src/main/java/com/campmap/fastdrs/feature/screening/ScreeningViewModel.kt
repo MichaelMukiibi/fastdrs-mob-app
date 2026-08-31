@@ -28,9 +28,10 @@ class ScreeningViewModel(private val inferenceEngine: InferenceEngine) : ViewMod
             }
     }
 
-    fun startScreening(eye: Eye) {
+    fun startScreening(patientId: String, eye: Eye) {
         _screeningState.value = Screening(
             id = UUID.randomUUID().toString(),
+            patientId = patientId,
             timestamp = System.currentTimeMillis(),
             eye = eye,
             image = null
@@ -42,10 +43,11 @@ class ScreeningViewModel(private val inferenceEngine: InferenceEngine) : ViewMod
     }
 
     fun runAnalysis() {
-        val image = _screeningState.value?.image ?: return
+        val screening = _screeningState.value ?: return
+        val image = screening.image ?: return
         viewModelScope.launch {
             val prediction = inferenceEngine.predict(image)
-            _screeningState.value = _screeningState.value?.copy(prediction = prediction)
+            _screeningState.value = _screeningState.value?.copy(prediction = prediction.toString())
         }
     }
 }
