@@ -23,15 +23,24 @@ class LiteRTInferenceEngine(private val context: Context) : InferenceEngine {
     }
 
     override suspend fun predict(image: FundusImage): Prediction {
-        // Simple placeholder inference logic
-        // Preprocessing and model invocation would go here
+        val preprocessor = ImagePreprocessor()
+        val inputBuffer = preprocessor.preprocess(image, context)
+
+        // Model output tensor: Assuming [1, 5] (Batch size 1, 5 classes)
+        val output = Array(1) { FloatArray(5) }
+
         val start = System.currentTimeMillis()
-        val dummyProbabilities = DRClass.entries.associateWith { 0.2f }
+        interpreter?.run(inputBuffer, output)
         val latency = System.currentTimeMillis() - start
+
+        val probabilities = output[0]
+        val maxProb = probabilities.maxOrNull() ?: 0f
+        val predictedIndex = probabilities.indexOfFirst { it == maxProb }
+
         return Prediction(
-            predictedClass = DRClass.NO_DR,
-            confidence = 0.95f,
-            probabilities = dummyProbabilities,
+            predictedClass = DRClass.entries[predictedIndex],
+            confidence = maxProb,
+            probabilities = DRClass.entries.associateWith { probabilities[it.ordinal] },
             inferenceLatencyMs = latency
         )
     }
