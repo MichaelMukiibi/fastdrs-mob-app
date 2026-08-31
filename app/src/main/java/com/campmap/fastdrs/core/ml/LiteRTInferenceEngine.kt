@@ -33,7 +33,13 @@ class LiteRTInferenceEngine(private val context: Context) : InferenceEngine {
         interpreter?.run(inputBuffer, output)
         val latency = System.currentTimeMillis() - start
 
-        val probabilities = output[0]
+        val probabilitiesRaw = output[0]
+        
+        // Apply Softmax to convert logits to probabilities
+        val expScores = probabilitiesRaw.map { kotlin.math.exp(it.toDouble()) }
+        val sumExp = expScores.sum()
+        val probabilities = expScores.map { (it / sumExp).toFloat() }.toFloatArray()
+
         val maxProb = probabilities.maxOrNull() ?: 0f
         val predictedIndex = probabilities.indexOfFirst { it == maxProb }
 
