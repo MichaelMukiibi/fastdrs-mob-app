@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analysis Transition - fastDRS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb691",
+                        "on-surface-variant": "#424752",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-tint": "#005db5",
+                        "surface-dim": "#d9dadb",
+                        "on-secondary-fixed": "#0f1c2d",
+                        "tertiary": "#7b3200",
+                        "inverse-primary": "#a8c8ff",
+                        "secondary": "#525f73",
+                        "on-primary-container": "#cadcff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e1e3e4",
+                        "secondary-fixed": "#d6e3fb",
+                        "on-tertiary-fixed": "#341100",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "on-surface": "#191c1d",
+                        "primary-fixed-dim": "#a8c8ff",
+                        "surface-container": "#edeeef",
+                        "primary-container": "#005fb8",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#3b485a",
+                        "on-tertiary-fixed-variant": "#783100",
+                        "primary": "#00488d",
+                        "background": "#f8f9fa",
+                        "surface-container-high": "#e7e8e9",
+                        "outline": "#727783",
+                        "on-background": "#191c1d",
+                        "on-tertiary-container": "#ffd1bc",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c2c6d4",
+                        "secondary-container": "#d6e3fb",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#586579",
+                        "on-primary-fixed": "#001b3d",
+                        "inverse-surface": "#2e3132",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f3f4f5",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-primary-fixed-variant": "#00468b",
+                        "tertiary-container": "#a04401",
+                        "secondary-fixed-dim": "#bac7de"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "edge-margin": "16px",
+                        "gutter": "12px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md-mobile": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md-mobile": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        
+        @keyframes pulse-opacity {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-opacity 3s ease-in-out infinite;
+        }
+
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 93, 181, 0.5); /* surface-tint */
+            box-shadow: 0 0 8px rgba(0, 93, 181, 0.8);
+            animation: scan 2s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background h-full flex flex-col font-body-lg">
+<!-- Suppressed TopAppBar and BottomNavBar as this is a transitional/transactional state -->
+<!-- Status Bar (Offline First Context) -->
+<div class="h-base bg-surface-container-highest w-full flex items-center justify-end px-md relative z-10">
+<span class="material-symbols-outlined text-[10px] text-primary" data-icon="cloud_off" data-weight="fill" style="font-variation-settings: 'FILL' 1;">cloud_off</span>
+</div>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center px-edge-margin relative overflow-hidden">
+<!-- Subtle background pattern for technical feel -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#191c1d 1px, transparent 1px); background-size: 24px 24px;"></div>
+<!-- Central Analysis Container -->
+<div class="w-full max-w-sm flex flex-col items-center relative z-10 bg-surface rounded-xl p-xl border border-outline-variant shadow-sm">
+<!-- Contextual Image Placeholder (Simulating fundus image under analysis) -->
+<div class="relative w-48 h-48 mb-xl rounded-lg overflow-hidden bg-black border border-outline-variant">
+<img class="w-full h-full object-cover opacity-60" data-alt="A detailed, highly clinical close-up of a human retina fundus image. The image is stark, sharp, and focused, rendered in deep oranges and reds against a pitch-black background. Thin, high-tech glowing blue analysis lines subtly overlay the medical image, suggesting advanced AI processing in a modern medical context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCofZYLlEk8OGq3w46OdQ63bkeCo9H53qXqsZyK733bN-k0CO0ltgq8KzTAV2DZh4fvRo75MLelXEkN1Fv_fOF3Ze76Z-IU_h_pdpoYqTYPtA5sezACDfK_gh_vcB1rBKcyit6rVstnW3vOYqCYPREf_I82HPqK7ZageHRWFBa57qFpKwcbXX8c_Yfcv7tBebXZSxw_lgWy19XwwkiSmEuOf3TKTDPEQMAP34_LvP3JJoAvBKPf49R4"/>
+<div class="scan-line"></div>
+<div class="absolute inset-0 border-2 border-primary/20 rounded-lg pointer-events-none"></div>
+</div>
+<!-- Progress Indicator -->
+<div class="relative flex items-center justify-center mb-lg">
+<svg class="w-16 h-16 transform -rotate-90">
+<circle class="text-surface-container-highest" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary progress-ring__circle" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="80" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<span class="material-symbols-outlined absolute text-primary text-2xl animate-pulse-slow" data-icon="memory">memory</span>
+</div>
+<!-- Text Communication -->
+<div class="text-center">
+<h2 class="font-headline-md-mobile md:font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface mb-sm">
+                    Analyzing Image
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="bolt">bolt</span>
+                    Performing on-device AI analysis
+                </p>
+<p class="font-label-sm text-label-sm text-outline mt-xs">
+                    No active connection required.
+                </p>
+</div>
+<!-- Skeleton Data Placeholders (simulating data being parsed) -->
+<div class="w-full mt-xl space-y-3 opacity-40">
+<div class="h-2 bg-surface-container-highest rounded w-3/4 mx-auto animate-pulse"></div>
+<div class="h-2 bg-surface-container-highest rounded w-1/2 mx-auto animate-pulse" style="animation-delay: 0.2s"></div>
+<div class="h-2 bg-surface-container-highest rounded w-5/6 mx-auto animate-pulse" style="animation-delay: 0.4s"></div>
+</div>
+</div>
+</main>
+<script>
+        // Simulate progress for the visual ring
+        document.addEventListener('DOMContentLoaded', () => {
+            const circle = document.querySelector('.progress-ring__circle');
+            const radius = circle.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            
+            let progress = 0;
+            const updateProgress = () => {
+                progress += Math.random() * 5;
+                if (progress > 100) progress = 0; // Loop for demo purposes
+                
+                const offset = circumference - progress / 100 * circumference;
+                circle.style.strokeDashoffset = offset;
+                
+                setTimeout(updateProgress, 200 + Math.random() * 300);
+            };
+            
+            updateProgress();
+        });
+    </script>
+</body></html>

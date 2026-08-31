@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>fastDRS - Screening Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb691",
+                        "on-surface-variant": "#424752",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-tint": "#005db5",
+                        "surface-dim": "#d9dadb",
+                        "on-secondary-fixed": "#0f1c2d",
+                        "tertiary": "#7b3200",
+                        "inverse-primary": "#a8c8ff",
+                        "secondary": "#525f73",
+                        "on-primary-container": "#cadcff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e1e3e4",
+                        "secondary-fixed": "#d6e3fb",
+                        "on-tertiary-fixed": "#341100",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "on-surface": "#191c1d",
+                        "primary-fixed-dim": "#a8c8ff",
+                        "surface-container": "#edeeef",
+                        "primary-container": "#005fb8",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#3b485a",
+                        "on-tertiary-fixed-variant": "#783100",
+                        "primary": "#00488d",
+                        "background": "#f8f9fa",
+                        "surface-container-high": "#e7e8e9",
+                        "outline": "#727783",
+                        "on-background": "#191c1d",
+                        "on-tertiary-container": "#ffd1bc",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c2c6d4",
+                        "secondary-container": "#d6e3fb",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#586579",
+                        "on-primary-fixed": "#001b3d",
+                        "inverse-surface": "#2e3132",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f3f4f5",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-primary-fixed-variant": "#00468b",
+                        "tertiary-container": "#a04401",
+                        "secondary-fixed-dim": "#bac7de"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "edge-margin": "16px",
+                        "gutter": "12px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md-mobile": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md-mobile": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg h-full flex flex-col antialiased">
+<!-- Sync Bar (Offline Indicator) -->
+<div class="h-1 bg-surface-variant w-full flex items-center px-2 z-50">
+<div class="h-0.5 w-full bg-surface-container-high overflow-hidden rounded-full">
+<div class="h-full bg-primary w-2/3 rounded-full"></div>
+</div>
+</div>
+<!-- TopAppBar (Suppressed navigation, showing transactional header) -->
+<header class="flex justify-between items-center w-full px-edge-margin h-14 bg-surface text-primary font-headline-sm text-headline-sm border-b border-outline-variant flat no shadows docked full-width top-0 z-40">
+<div class="flex items-center gap-2">
+<button class="hover:bg-surface-container-high transition-colors p-2 rounded-full -ml-2 text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<span class="font-headline-sm text-headline-sm-mobile md:text-headline-sm text-primary uppercase tracking-wider font-bold">fastDRS</span>
+</div>
+<div class="flex items-center text-on-surface-variant font-label-md text-label-md">
+<span>Patient: JD-8492</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center p-edge-margin relative overflow-hidden">
+<!-- Instructional Header -->
+<div class="text-center mb-xl w-full max-w-2xl">
+<h1 class="font-display-lg text-display-lg text-on-background mb-sm">Select Eye for Screening</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Choose the eye to begin image capture. Ensure the patient is properly aligned.</p>
+</div>
+<!-- Eye Selection Grid -->
+<div class="grid grid-cols-2 gap-md md:gap-xl w-full max-w-2xl relative z-10">
+<!-- Right Eye (OD) Selection Card - ACTIVE STATE EXAMPLE -->
+<button class="relative flex flex-col items-center justify-center p-xl bg-surface-container-lowest border-2 border-primary rounded-xl shadow-lg transition-all transform scale-[1.02] overflow-hidden group focus:outline-none focus:ring-4 focus:ring-primary-fixed">
+<!-- Background subtle tint for active state -->
+<div class="absolute inset-0 bg-primary-fixed opacity-10"></div>
+<div class="relative z-10 mb-md w-32 h-32 md:w-48 md:h-48 rounded-full border border-surface-variant bg-surface-bright flex items-center justify-center shadow-inner overflow-hidden">
+<span class="material-symbols-outlined text-[80px] md:text-[120px] text-primary" data-icon="visibility" data-weight="fill">visibility</span>
+</div>
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-primary mb-xs">Right Eye</h2>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest bg-surface-container py-1 px-3 rounded-full">OD (Oculus Dexter)</span>
+<!-- Active Indicator Pill -->
+<div class="absolute top-4 right-4 bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle" data-weight="fill">check_circle</span> Selected
+                </div>
+</button>
+<!-- Left Eye (OS) Selection Card - INACTIVE STATE EXAMPLE -->
+<button class="relative flex flex-col items-center justify-center p-xl bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-outline hover:shadow-md transition-all group focus:outline-none focus:ring-4 focus:ring-secondary-fixed">
+<div class="relative z-10 mb-md w-32 h-32 md:w-48 md:h-48 rounded-full border border-surface-variant bg-surface flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[80px] md:text-[120px] text-on-surface-variant" data-icon="visibility">visibility</span>
+</div>
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface mb-xs group-hover:text-primary transition-colors">Left Eye</h2>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest bg-surface-container py-1 px-3 rounded-full">OS (Oculus Sinister)</span>
+</button>
+</div>
+<!-- Action Area -->
+<div class="mt-xl w-full max-w-2xl flex justify-end">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-full shadow hover:bg-on-primary-fixed-variant transition-colors flex items-center gap-2 h-[48px] focus:outline-none focus:ring-4 focus:ring-primary-fixed">
+                Begin Capture <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</main>
+</body></html>

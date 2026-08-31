@@ -34,8 +34,15 @@ android {
     buildFeatures {
         compose = true
     }
+    
     androidResources {
         noCompress.add("tflite")
+    }
+    
+    sourceSets {
+        getByName("main") {
+            java.srcDirs("build/generated/ksp/debug/java", "build/generated/ksp/debug/kotlin")
+        }
     }
 }
 

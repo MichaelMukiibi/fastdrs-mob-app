@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>fastDRS - Image Review</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface": "#f8f9fa",
+                "surface-container-lowest": "#ffffff",
+                "background": "#f8f9fa",
+                "on-surface-variant": "#424752",
+                "on-secondary-fixed-variant": "#3b485a",
+                "on-primary-fixed": "#001b3d",
+                "inverse-primary": "#a8c8ff",
+                "secondary-fixed-dim": "#bac7de",
+                "on-secondary-fixed": "#0f1c2d",
+                "tertiary-fixed-dim": "#ffb691",
+                "tertiary": "#7b3200",
+                "on-background": "#191c1d",
+                "on-error-container": "#93000a",
+                "outline-variant": "#c2c6d4",
+                "on-tertiary-container": "#ffd1bc",
+                "tertiary-fixed": "#ffdbcb",
+                "surface-variant": "#e1e3e4",
+                "on-secondary": "#ffffff",
+                "error": "#ba1a1a",
+                "secondary-container": "#d6e3fb",
+                "surface-bright": "#f8f9fa",
+                "outline": "#727783",
+                "on-surface": "#191c1d",
+                "on-error": "#ffffff",
+                "tertiary-container": "#a04401",
+                "surface-container-low": "#f3f4f5",
+                "primary-fixed-dim": "#a8c8ff",
+                "secondary": "#525f73",
+                "surface-container-high": "#e7e8e9",
+                "on-primary-fixed-variant": "#00468b",
+                "inverse-on-surface": "#f0f1f2",
+                "on-tertiary-fixed": "#341100",
+                "inverse-surface": "#2e3132",
+                "on-tertiary-fixed-variant": "#783100",
+                "on-primary-container": "#cadcff",
+                "on-secondary-container": "#586579",
+                "primary-fixed": "#d6e3ff",
+                "error-container": "#ffdad6",
+                "primary-container": "#005fb8",
+                "surface-container": "#edeeef",
+                "surface-tint": "#005db5",
+                "on-tertiary": "#ffffff",
+                "primary": "#00488d",
+                "secondary-fixed": "#d6e3fb",
+                "surface-container-highest": "#e1e3e4",
+                "on-primary": "#ffffff",
+                "surface-dim": "#d9dadb"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "lg": "24px",
+                "xs": "4px",
+                "edge-margin": "16px",
+                "md": "16px",
+                "xl": "32px",
+                "base": "4px",
+                "gutter": "12px",
+                "sm": "8px"
+        },
+        "fontFamily": {
+                "headline-sm": [
+                        "Inter"
+                ],
+                "display-lg": [
+                        "Inter"
+                ],
+                "label-md": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Inter"
+                ],
+                "headline-md-mobile": [
+                        "Inter"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "label-sm": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "headline-sm": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md-mobile": [
+                        "20px",
+                        {
+                                "lineHeight": "26px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        /* Minimal custom styles for things Tailwind can't easily do inline */
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .inset-viewer {
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-on-surface-variant flex justify-between items-center w-full px-edge-margin h-14 docked full-width top-0 z-50">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary" data-icon="cloud_off">cloud_off</span>
+<span class="font-headline-sm text-headline-sm-mobile md:text-headline-sm text-primary dark:text-primary-fixed-dim uppercase tracking-wider font-bold">fastDRS</span>
+</div>
+<!-- Status indicator placeholder -->
+<div class="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+            Offline
+        </div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col items-center justify-start pt-md pb-xl px-edge-margin md:px-lg max-w-4xl mx-auto w-full gap-md">
+<!-- Context Header -->
+<div class="w-full flex justify-between items-end mb-sm">
+<div>
+<h1 class="font-headline-md-mobile md:font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface">Image Review</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Patient ID: 893-A29 • Right Eye (OD)</p>
+</div>
+</div>
+<!-- Fundus Image Container -->
+<div class="w-full max-w-2xl bg-black rounded-lg overflow-hidden relative inset-viewer group border border-outline-variant">
+<!-- Simulated Fundus Image -->
+<div class="bg-cover bg-center w-full aspect-square md:aspect-[4/3]" data-alt="A highly detailed, clinically accurate photograph of a human retina (fundus) taken through an ophthalmoscope. The image shows the optic disc, macula, and delicate vascular network. The lighting is bright and focused, typical of medical imaging, revealing subtle variations in color and texture. The overall aesthetic is clinical, precise, and objective, suitable for a professional medical application." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQ-2zKEvJ4OAY7DOWBTi8Tywa8iCu9qd_EOiZNcBv8nUHOZ57WBQtg69e6cN0-42tUTBs-Fwt_fNqn35i0EGlGDz2eLYI-lr_M4Sz8VTv-O0jk2-sTnFNih5brrbSfob9GVKoJ1QR4NuP9nH93EBqxXm37DXpUC4p_d4dpd_nke--UoWySNsxHxwmTOrMzFk1GFNaElexcPmV1xbwPtpj2IPlqDzxmsWoQPdJKGR-MCuRM6tV4DQyt')"></div>
+<!-- Full Screen Toggle Overlay -->
+<button class="absolute top-sm right-sm bg-surface-container-high/80 text-on-surface p-sm rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center hover:bg-surface-variant">
+<span class="material-symbols-outlined" data-icon="fullscreen">fullscreen</span>
+</button>
+<!-- Image Quality Metrics Overlay (Subtle) -->
+<div class="absolute bottom-sm left-sm bg-surface-container-highest/90 backdrop-blur-md px-sm py-xs rounded flex gap-sm items-center font-label-sm text-label-sm text-on-surface">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="contrast">contrast</span> OK</span>
+<span class="w-px h-3 bg-outline-variant"></span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="focus">center_focus_strong</span> Sharp</span>
+</div>
+</div>
+<!-- Assessment Section -->
+<div class="w-full max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col items-center text-center gap-md mt-sm">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Is this image suitable for screening?</h2>
+<div class="flex flex-col w-full gap-md mt-sm">
+<button class="w-full flex items-center justify-center gap-sm bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md text-label-md py-sm px-md rounded-lg transition-colors border border-outline-variant min-h-[48px]">
+<span class="material-symbols-outlined text-[20px]" data-icon="replay">replay</span>
+                    Retake Image
+                </button>
+<button class="w-full flex items-center justify-center gap-sm bg-primary hover:bg-primary-fixed-variant text-on-primary font-label-md text-label-md py-sm px-md rounded-lg transition-colors shadow-sm min-h-[48px]">
+<span class="material-symbols-outlined text-[20px]" data-icon="analytics">analytics</span>
+                    Analyze Image
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on this transactional/focused screen as per Semantic Shell Mandate) -->
+<!-- The navigation shell is suppressed to prioritize the task flow (Image Review). -->
+</body></html>

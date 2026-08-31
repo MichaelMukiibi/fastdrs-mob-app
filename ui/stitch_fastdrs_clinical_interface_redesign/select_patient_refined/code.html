@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Patient Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface": "#f8f9fa",
+                "surface-container-lowest": "#ffffff",
+                "background": "#f8f9fa",
+                "on-surface-variant": "#424752",
+                "on-secondary-fixed-variant": "#3b485a",
+                "on-primary-fixed": "#001b3d",
+                "inverse-primary": "#a8c8ff",
+                "secondary-fixed-dim": "#bac7de",
+                "on-secondary-fixed": "#0f1c2d",
+                "tertiary-fixed-dim": "#ffb691",
+                "tertiary": "#7b3200",
+                "on-background": "#191c1d",
+                "on-error-container": "#93000a",
+                "outline-variant": "#c2c6d4",
+                "on-tertiary-container": "#ffd1bc",
+                "tertiary-fixed": "#ffdbcb",
+                "surface-variant": "#e1e3e4",
+                "on-secondary": "#ffffff",
+                "error": "#ba1a1a",
+                "secondary-container": "#d6e3fb",
+                "surface-bright": "#f8f9fa",
+                "outline": "#727783",
+                "on-surface": "#191c1d",
+                "on-error": "#ffffff",
+                "tertiary-container": "#a04401",
+                "surface-container-low": "#f3f4f5",
+                "primary-fixed-dim": "#a8c8ff",
+                "secondary": "#525f73",
+                "surface-container-high": "#e7e8e9",
+                "on-primary-fixed-variant": "#00468b",
+                "inverse-on-surface": "#f0f1f2",
+                "on-tertiary-fixed": "#341100",
+                "inverse-surface": "#2e3132",
+                "on-tertiary-fixed-variant": "#783100",
+                "on-primary-container": "#cadcff",
+                "on-secondary-container": "#586579",
+                "primary-fixed": "#d6e3ff",
+                "error-container": "#ffdad6",
+                "primary-container": "#005fb8",
+                "surface-container": "#edeeef",
+                "surface-tint": "#005db5",
+                "on-tertiary": "#ffffff",
+                "primary": "#00488d",
+                "secondary-fixed": "#d6e3fb",
+                "surface-container-highest": "#e1e3e4",
+                "on-primary": "#ffffff",
+                "surface-dim": "#d9dadb"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "lg": "24px",
+                "xs": "4px",
+                "edge-margin": "16px",
+                "md": "16px",
+                "xl": "32px",
+                "base": "4px",
+                "gutter": "12px",
+                "sm": "8px"
+        },
+        "fontFamily": {
+                "headline-sm": [
+                        "Inter"
+                ],
+                "display-lg": [
+                        "Inter"
+                ],
+                "label-md": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Inter"
+                ],
+                "headline-md-mobile": [
+                        "Inter"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "label-sm": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "headline-sm": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md-mobile": [
+                        "20px",
+                        {
+                                "lineHeight": "26px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface text-primary flex justify-between items-center w-full px-edge-margin h-14 border-b border-outline-variant md:hidden">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high transition-colors p-sm rounded-full cursor-pointer" data-icon="cloud_off" style="font-variation-settings: 'FILL' 0;">cloud_off</span>
+<h1 class="font-headline-sm text-headline-sm-mobile text-primary uppercase tracking-wider">fastDRS</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="account_circle" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</div>
+</header>
+<!-- Web Top Nav (Hidden on Mobile) -->
+<header class="hidden md:flex bg-surface text-primary justify-between items-center w-full px-edge-margin h-16 border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant p-sm rounded-full" data-icon="cloud_off" style="font-variation-settings: 'FILL' 0;">cloud_off</span>
+<h1 class="font-headline-sm text-headline-sm text-primary uppercase tracking-wider">fastDRS</h1>
+<nav class="ml-lg flex gap-md">
+<a class="font-label-md text-label-md text-primary bg-primary-container text-on-primary-container px-md py-sm rounded-full transition-colors flex items-center gap-xs" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+                    Home
+                </a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-full transition-colors flex items-center gap-xs" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="history" style="font-variation-settings: 'FILL' 0;">history</span>
+                    History
+                </a>
+</nav>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center border border-outline-variant cursor-pointer hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="account_circle" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto px-edge-margin py-lg md:px-xl md:max-w-7xl mx-auto w-full pb-24 md:pb-lg">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-lg gap-md">
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-background">Patient Selection</h2>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-full hover:bg-on-primary-fixed-variant transition-colors flex items-center gap-sm shadow-[0_4px_4px_rgba(0,0,0,0.1)] active:shadow-none active:translate-y-px">
+<span class="material-symbols-outlined" data-icon="add" style="font-variation-settings: 'FILL' 0;">add</span>
+                Create New Patient
+            </button>
+</div>
+<!-- Search Bar -->
+<div class="mb-xl relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 transform -translate-y-1/2 text-on-surface-variant" data-icon="search" style="font-variation-settings: 'FILL' 0;">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant text-on-background font-body-md text-body-md rounded-lg py-sm pl-12 pr-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Search by Patient Name or ID..." type="text"/>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+<!-- Left Column: Recently Screened -->
+<section class="lg:col-span-1 flex flex-col gap-sm">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Recently Screened</h3>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="flex justify-between items-start">
+<h4 class="font-headline-sm text-headline-sm-mobile text-on-background">Doe, John</h4>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-xs py-1 rounded">ID: 98765</span>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-body-md text-body-md mt-xs">
+<span>65 M</span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<span>Screened Today</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="flex justify-between items-start">
+<h4 class="font-headline-sm text-headline-sm-mobile text-on-background">Smith, Mary</h4>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-xs py-1 rounded">ID: 43210</span>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-body-md text-body-md mt-xs">
+<span>72 F</span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<span>Screened Yesterday</span>
+</div>
+</div>
+</section>
+<!-- Right Column: Patient List (Glassmorphism/Card aesthetic) -->
+<section class="lg:col-span-2 flex flex-col gap-sm">
+<div class="flex justify-between items-center mb-xs">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">All Patients</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="filter_list" style="font-variation-settings: 'FILL' 0;">filter_list</span>
+</div>
+<!-- Patient Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col sm:flex-row sm:items-center justify-between gap-md hover:border-primary transition-colors group cursor-pointer relative overflow-hidden">
+<div class="flex flex-col gap-xs z-10">
+<div class="flex items-center gap-sm">
+<h4 class="font-headline-sm text-headline-sm-mobile md:text-headline-sm text-on-background group-hover:text-primary transition-colors">Williams, Robert</h4>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-xs py-1 rounded">ID: 11223</span>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-body-md text-body-md">
+<span>58 M</span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<span>DOB: 12/04/1965</span>
+</div>
+</div>
+<div class="flex items-center gap-sm z-10 mt-sm sm:mt-0">
+<div class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-sm py-1 rounded-full flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="pending_actions" style="font-variation-settings: 'FILL' 0;">pending_actions</span>
+                             Needs Screening
+                        </div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right" style="font-variation-settings: 'FILL' 0;">chevron_right</span>
+</div>
+<!-- Subtle hover gradient -->
+<div class="absolute inset-0 bg-gradient-to-r from-primary-fixed/0 via-primary-fixed/10 to-primary-fixed/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+</div>
+<!-- Patient Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col sm:flex-row sm:items-center justify-between gap-md hover:border-primary transition-colors group cursor-pointer relative overflow-hidden">
+<div class="flex flex-col gap-xs z-10">
+<div class="flex items-center gap-sm">
+<h4 class="font-headline-sm text-headline-sm-mobile md:text-headline-sm text-on-background group-hover:text-primary transition-colors">Garcia, Maria</h4>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-xs py-1 rounded">ID: 33445</span>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-body-md text-body-md">
+<span>61 F</span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<span>DOB: 08/22/1962</span>
+</div>
+</div>
+<div class="flex items-center gap-sm z-10 mt-sm sm:mt-0">
+<div class="bg-[#e6f4ea] text-[#137333] font-label-sm text-label-sm px-sm py-1 rounded-full flex items-center gap-xs border border-[#137333]/20">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                             Screened (No DR)
+                        </div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right" style="font-variation-settings: 'FILL' 0;">chevron_right</span>
+</div>
+</div>
+<!-- Patient Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col sm:flex-row sm:items-center justify-between gap-md hover:border-primary transition-colors group cursor-pointer relative overflow-hidden">
+<div class="flex flex-col gap-xs z-10">
+<div class="flex items-center gap-sm">
+<h4 class="font-headline-sm text-headline-sm-mobile md:text-headline-sm text-on-background group-hover:text-primary transition-colors">Chen, Wei</h4>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-xs py-1 rounded">ID: 55667</span>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-body-md text-body-md">
+<span>45 M</span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<span>DOB: 11/15/1978</span>
+</div>
+</div>
+<div class="flex items-center gap-sm z-10 mt-sm sm:mt-0">
+<div class="bg-[#fce8e6] text-[#c5221f] font-label-sm text-label-sm px-sm py-1 rounded-full flex items-center gap-xs border border-[#c5221f]/20">
+<span class="material-symbols-outlined text-[16px]" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+                             Referral Required
+                        </div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right" style="font-variation-settings: 'FILL' 0;">chevron_right</span>
+</div>
+</div>
+<button class="w-full py-sm mt-sm border border-outline-variant text-primary font-label-md text-label-md rounded-lg hover:bg-surface-variant transition-colors flex items-center justify-center gap-xs">
+                     Load More
+                     <span class="material-symbols-outlined text-[18px]" data-icon="expand_more" style="font-variation-settings: 'FILL' 0;">expand_more</span>
+</button>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-1 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-container hover:bg-surface-variant transition-all rounded-full px-6 py-1" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="history" style="font-variation-settings: 'FILL' 0;">history</span>
+<span class="font-label-md text-label-md mt-1">History</span>
+</a>
+</nav>
+<!-- Persistent Offline Sync Indicator Footer -->
+<div class="fixed bottom-[72px] md:bottom-0 left-0 w-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-edge-margin py-xs flex justify-between items-center border-t border-outline-variant z-40">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="sync" style="font-variation-settings: 'FILL' 0;">sync</span>
+<span>Last Synced: 2 mins ago</span>
+</div>
+<span class="text-secondary">Network: Strong</span>
+</div>
+</body></html>
